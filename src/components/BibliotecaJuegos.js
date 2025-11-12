@@ -1,24 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import TarjetaJuego from "./TarjetaJuego";
+import FormularioJuego from "./FormularioJuego";
 
-function BibliotecaJuegos() {
-  // Aquí luego mostraremos los juegos desde el backend
-  const juegos = [
-    {id: 1, titulo: "Clash Royale", genero: "Estrategia", puntuacion: 5 },
-    { id: 2, titulo: "The Legend of Zelda", genero: "Aventura", puntuacion: 4.2 },
-    { id: 3, titulo: "Minecraft", genero: "Construcción", puntuacion: 4.5 },
-  ];
+const BibliotecaJuegos = () => {
+  const [juegos, setJuegos] = useState([]);
+
+  const obtenerJuegos = async () => {
+    try {
+      const res = await axios.get("http://localhost:4000/api/juegos");
+      setJuegos(res.data);
+    } catch (error) {
+      console.error("Error al obtener los juegos:", error);
+    }
+  };
+
+  useEffect(() => {
+    obtenerJuegos();
+  }, []);
+
+  const agregarJuego = (nuevoJuego) => {
+    setJuegos([...juegos, nuevoJuego]);
+  };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>🎮 Mi Biblioteca de Juegos</h2>
-      <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-        {juegos.map((juego) => (
-          <TarjetaJuego key={juego.id} juego={juego} />
-        ))}
+    <div>
+      <h2>🎮 Biblioteca de Juegos</h2>
+      <FormularioJuego onAgregar={agregarJuego} />
+      <div className="contenedor-juegos">
+        {juegos.length > 0 ? (
+          juegos.map((juego) => (
+            <TarjetaJuego key={juego._id} juego={juego} />
+          ))
+        ) : (
+          <p>No hay juegos disponibles.</p>
+        )}
       </div>
     </div>
   );
-}
+};
 
 export default BibliotecaJuegos;

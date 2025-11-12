@@ -3,8 +3,8 @@ import BibliotecaJuegos from "./components/BibliotecaJuegos";
 
 function App() {
   return (
-    <div>
-      <h1 style={{ textAlign: "center" }}>GameTracker 🎮</h1>
+    <div className="App">
+      <h1>🎮 GameTracker</h1>
       <BibliotecaJuegos />
     </div>
   );
