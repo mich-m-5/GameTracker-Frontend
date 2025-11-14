@@ -1,0 +1,58 @@
+.biblioteca {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.juego-card {
+  background: #111;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #000;
+  transition: 0.3s ease;
+  text-align: center;
+  border: 1px solid #222;
+}
+
+.juego-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 18px #ffd900;
+  border-color: #ffd900;
+}
+
+.juego-portada {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.titulo-iluminado {
+  font-size: 22px;
+  color: #ffd900;
+  text-shadow: 0 0 8px #ffea00;
+  transition: 0.3s ease;
+}
+
+.titulo-iluminado:hover {
+  text-shadow: 0 0 14px #ffe600;
+  color: #fff;
+}
+
+.btn-resena {
+  display: block;
+  margin-top: 12px;
+  padding: 10px;
+  background: #ffd900;
+  color: #000;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.btn-resena:hover {
+  background: #ffe733;
+}

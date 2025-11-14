@@ -1,32 +1,75 @@
-.formulario-juego {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+:root{
+  --bg:#0f1115;
+  --card:#13151a;
+  --muted:#a8b0c3;
+  --accent:#7c5cff; /* violeta */
+  --glass: rgba(255,255,255,0.03);
+  font-family: "Poppins", sans-serif;
 }
-
-.formulario-juego input,
-.formulario-juego button {
-  padding: 8px;
-  font-size: 1rem;
-}
-
-.contenedor-juegos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.tarjeta-juego {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 10px;
+.sin-juegos {
+  color: var(--muted);
+  font-style: italic;
   text-align: center;
-  width: 220px;
+  margin-top: 50px;
+  font-size: 1.1rem;
+}
+.contenido-principal {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+body,html,#root{ height:100%; margin:0; background: var(--bg); color:#e6eef8; }
+
+.nav{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 20px; background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.logo{ font-weight:700; color:var(--accent); letter-spacing:1px; }
+.btn-agregar{ background:var(--accent); color:#fff; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; }
+
+.page-title{ text-align:center; margin:18px 0 0 0; font-size:1.6rem; }
+
+.contenedor-juegos{ display:flex; flex-wrap:wrap; gap:18px; justify-content:center; padding:20px; }
+
+.tarjeta-juego{
+  background: var(--card);
+  width:240px; padding:12px; border-radius:12px; box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.tarjeta-juego:hover{ transform: translateY(-6px); box-shadow: 0 12px 30px rgba(124,92,255,0.15); }
+.tarjeta-juego img{ width:100%; height:130px; object-fit:cover; border-radius:8px; }
+.tarjeta-juego h3{ margin:10px 0 6px 0; font-size:1.05rem; }
+.tarjeta-juego .sub{ color:var(--muted); font-size:0.9rem; margin-bottom:6px; }
+.rating{ color:var(--accent); font-weight:700; margin-bottom:8px; }
+.accions button{ background:none; border:1px solid rgba(255,255,255,0.05); color:var(--muted); padding:6px 8px; border-radius:8px; cursor:pointer; }
+
+.modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:1000; }
+.modal{ background:var(--card); padding:18px; border-radius:10px; width:90%; max-width:520px; }
+.close{ float:right; background:none; border:none; color:#fff; font-size:1.1rem; cursor:pointer; }
+
+/* Form styles */
+.formulario-juego input, .formulario-juego textarea, .form-resena input, .form-resena textarea{
+  width:100%; padding:8px; margin:6px 0; border-radius:8px; border:1px solid rgba(255,255,255,0.05); background:var(--glass); color:#e6eef8;
+}
+.formulario-juego button{ background:var(--accent); color:#fff; border:none; padding:10px 12px; border-radius:8px; cursor:pointer; width:100%; }
+
+.ranking{ background:transparent; color:var(--muted); padding:10px; }
+.ranking ol{ padding-left:18px; }
+ 
+.juego-card {
+  background: #1e1e1e;
+  padding: 16px;
+  border-radius: 12px;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.juego-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px #FFD700;
 }

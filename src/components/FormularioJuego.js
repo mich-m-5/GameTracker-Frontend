@@ -1,114 +1,101 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const FormularioJuego = ({ onAgregar }) => {
-  const [formData, setFormData] = useState({
-    titulo: "",
-    plataforma: "",
-    genero: "",
-    horasJugadas: "",
-    completado: false,
-    puntuacion: "",
-    portada: "",
-  });
+function FormularioJuego({ onAgregar }) {
+  const [titulo, setTitulo] = useState("");
+  const [portada, setPortada] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [plataforma, setPlataforma] = useState("");
+  const [completado, setCompletado] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
+  const manejarEnvio = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:4000/api/juegos", formData);
-      onAgregar(res.data);
-      setFormData({
-        titulo: "",
-        plataforma: "",
-        genero: "",
-        horasJugadas: "",
-        completado: false,
-        puntuacion: "",
-        portada: "",
+      await axios.post("http://localhost:4000/api/juegos", {
+        titulo,
+        portada,
+        descripcion,
+        tipo,
+        plataforma,
+        completado,
       });
       alert("✅ Juego agregado correctamente");
+      setTitulo("");
+      setPortada("");
+      setDescripcion("");
+      setTipo("");
+      setPlataforma("");
+      setCompletado(false);
+      if (onAgregar) onAgregar();
     } catch (error) {
-      alert("❌ Error al agregar el juego");
-      console.error(error);
+      console.error("❌ Error al agregar el juego:", error);
+      alert("Error al agregar el juego");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="formulario-juego">
-      <h2>➕ Agregar nuevo juego</h2>
+    <form className="formulario-juego" onSubmit={manejarEnvio}>
+      <h2>Agregar nuevo juego</h2>
 
+      <label>Título:</label>
       <input
         type="text"
-        name="titulo"
-        placeholder="Título del juego"
-        value={formData.titulo}
-        onChange={handleChange}
+        value={titulo}
+        onChange={(e) => setTitulo(e.target.value)}
+        placeholder="Nombre del juego"
         required
       />
 
+      <label>URL de la portada:</label>
       <input
         type="text"
-        name="plataforma"
-        placeholder="Plataforma"
-        value={formData.plataforma}
-        onChange={handleChange}
+        value={portada}
+        onChange={(e) => setPortada(e.target.value)}
+        placeholder="Ej: https://imagen.com/juego.jpg"
+        required
       />
 
+      <label>Descripción:</label>
+      <textarea
+        value={descripcion}
+        onChange={(e) => setDescripcion(e.target.value)}
+        placeholder="Escribe una breve descripción del juego"
+        required
+      ></textarea>
+
+      <label>Tipo de juego:</label>
       <input
         type="text"
-        name="genero"
-        placeholder="Género"
-        value={formData.genero}
-        onChange={handleChange}
+        value={tipo}
+        onChange={(e) => setTipo(e.target.value)}
+        placeholder="Ej: Acción, Aventura, RPG..."
       />
 
-      <input
-        type="number"
-        name="horasJugadas"
-        placeholder="Horas jugadas"
-        value={formData.horasJugadas}
-        onChange={handleChange}
-      />
+      <label>Plataforma:</label>
+      <select
+        value={plataforma}
+        onChange={(e) => setPlataforma(e.target.value)}
+        required
+      >
+        <option value="">Selecciona una plataforma</option>
+        <option value="PC">PC</option>
+        <option value="Celular">Celular</option>
+        <option value="Consola">Consola</option>
+      </select>
 
       <label>
         <input
           type="checkbox"
-          name="completado"
-          checked={formData.completado}
-          onChange={handleChange}
+          checked={completado}
+          onChange={() => setCompletado(!completado)}
         />
         ¿Completado?
       </label>
 
-      <input
-        type="number"
-        name="puntuacion"
-        placeholder="Puntuación (0-5)"
-        min="0"
-        max="5"
-        value={formData.puntuacion}
-        onChange={handleChange}
-      />
-
-      <input
-        type="text"
-        name="portada"
-        placeholder="URL de la portada"
-        value={formData.portada}
-        onChange={handleChange}
-      />
-
-      <button type="submit">Agregar</button>
+      <button type="submit">Agregar juego</button>
     </form>
   );
-};
+}
 
 export default FormularioJuego;

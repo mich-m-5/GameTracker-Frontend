@@ -1,43 +1,41 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import TarjetaJuego from "./TarjetaJuego";
-import FormularioJuego from "./FormularioJuego";
+import React from "react";
+import "./BibliotecaJuegos.css";
 
-const BibliotecaJuegos = () => {
-  const [juegos, setJuegos] = useState([]);
-
-  const obtenerJuegos = async () => {
-    try {
-      const res = await axios.get("http://localhost:4000/api/juegos");
-      setJuegos(res.data);
-    } catch (error) {
-      console.error("Error al obtener los juegos:", error);
-    }
-  };
-
-  useEffect(() => {
-    obtenerJuegos();
-  }, []);
-
-  const agregarJuego = (nuevoJuego) => {
-    setJuegos([...juegos, nuevoJuego]);
-  };
-
+function BibliotecaJuegos({ juegos }) {
   return (
-    <div>
-      <h2>🎮 Biblioteca de Juegos</h2>
-      <FormularioJuego onAgregar={agregarJuego} />
-      <div className="contenedor-juegos">
-        {juegos.length > 0 ? (
-          juegos.map((juego) => (
-            <TarjetaJuego key={juego._id} juego={juego} />
-          ))
-        ) : (
-          <p>No hay juegos disponibles.</p>
-        )}
-      </div>
+    <div className="biblioteca">
+      {juegos.length === 0 && (
+        <p style={{ color: "#ccc", textAlign: "center" }}>
+          No hay juegos todavía. Agrega uno.
+        </p>
+      )}
+
+      {juegos.map((j) => (
+        <div key={j._id} className="juego-card">
+          <img src={j.portada} alt={j.titulo} className="juego-portada" />
+
+          <h3 className="titulo-iluminado">{j.titulo}</h3>
+
+          <p>{j.descripcion}</p>
+
+          <p>
+            <strong>Tipo:</strong> {j.tipo}
+          </p>
+
+          <p>
+            <strong>Plataforma:</strong> {j.plataforma}
+          </p>
+
+          {j.completado && <p>✅ Completado</p>}
+
+          {/* BOTÓN PARA IR A LAS RESEÑAS */}
+          <a className="btn-resena" href={`/reseñas/${j._id}`}>
+            Ver / Agregar reseñas
+          </a>
+        </div>
+      ))}
     </div>
   );
-};
+}
 
 export default BibliotecaJuegos;
