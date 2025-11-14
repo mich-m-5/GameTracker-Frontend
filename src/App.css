@@ -73,3 +73,10 @@ body,html,#root{ height:100%; margin:0; background: var(--bg); color:#e6eef8; }
   transform: scale(1.03);
   box-shadow: 0 0 15px #FFD700;
 }
+.titulo-app {
+  font-size: 42px;
+  text-align: center;
+  color: #FFD700;
+  margin-top: 20px;
+  text-shadow: 0 0 15px #FFD700, 0 0 25px #FFA500;
+}

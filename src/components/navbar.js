@@ -1,11 +1,12 @@
 import React from "react";
 
-function Navbar({ onOpenAgregar }) {
+function Navbar({ onAgregarJuego }) {
   return (
-    <nav className="navbar">
-      <h2 className="logo">🎮 GameTracker</h2>
-      <button className="btn-agregar" onClick={onOpenAgregar}>
-        ➕ Agregar juego
+    <nav className="nav">
+      <h1 className="titulo-app">GameTracker</h1>
+
+      <button className="btn-agregar" onClick={onAgregarJuego}>
+        Agregar Juego
       </button>
     </nav>
   );

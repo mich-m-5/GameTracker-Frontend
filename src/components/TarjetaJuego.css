@@ -1,19 +1,35 @@
-/* src/components/TarjetaJuego.css */
-
-.tarjeta-juego {
+.juego-card {
   background: #222;
+  padding: 15px;
   border-radius: 12px;
-  padding: 16px;
-  margin: 10px;
-  color: white;
-  text-align: center;
-  width: 220px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  margin: 15px;
+  transition: 0.3s;
+  box-shadow: 0 0 10px #000;
 }
 
-.imagen-juego {
-  width: 100%;
-  height: 150px;
-  object-fit: cover; /* ✅ Hace que todas las imágenes tengan el mismo tamaño */
+.juego-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px yellow;
+}
+
+.titulo-juego {
+  color: yellow;
+  text-shadow: 0 0 8px yellow;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.btn-resena {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #444;
+  border: none;
+  color: white;
   border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-resena:hover {
+  background: yellow;
+  color: black;
 }
