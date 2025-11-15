@@ -29,7 +29,7 @@ function FormularioResena({ idJuego }) {
       setEstrellas(0);
       setHover(0);
 
-      // ⚡ aumentar trigger para avisar a ListaResenas
+      
       setTrigger((prev) => prev + 1);
     } catch (err) {
       console.error("Error enviando reseña:", err);
@@ -68,7 +68,7 @@ function FormularioResena({ idJuego }) {
         <button type="submit">Enviar reseña</button>
       </form>
 
-      {/* Lista de reseñas dentro del mismo archivo */}
+      
       <ListaResenas idJuego={idJuego} nuevaResenaTrigger={trigger} />
     </div>
   );

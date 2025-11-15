@@ -1,104 +1,92 @@
-/* src/components/FormularioResena.css */
 .form-resena {
-  background: #1a1a1a;
-  padding: 15px;
-  border-radius: 10px;
-  margin-top: 10px;
+  background: #0b0b0b; 
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 12px;
   text-align: center;
+  color: #f8fafc; 
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+
+.form-resena label {
+  display: block;
+  text-align: left;
+  font-weight: 600;
+  margin: 8px 0 4px;
 }
 
 .estrellas {
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
-  gap: 5px;
+  margin-bottom: 12px;
+  gap: 6px;
 }
 
 .estrella {
-  font-size: 40px;
-  color: #444;
+  font-size: 36px;
+  color: #475569; 
   cursor: pointer;
   transition: color 0.2s ease, transform 0.1s ease;
 }
 
 .estrella:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .estrella.activa {
-  color: gold;
+  color: #fbbf24; 
 }
 
-textarea {
-  width: 90%;
-  height: 70px;
-  border-radius: 8px;
-  border: none;
-  padding: 10px;
-  resize: none;
-  background: #222;
-  color: white;
-}
-
-button {
-  background: #ffcc00;
-  color: #000;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 14px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 10px;
-}/* src/components/FormularioResena.css */
-.form-resena {
-  background: #1a1a1a;
-  padding: 15px;
+.form-resena input[type="text"],
+.form-resena textarea {
+  width: 100%;
   border-radius: 10px;
-  margin-top: 10px;
-  text-align: center;
+  border: 1px solid #334155; 
+  padding: 10px 12px;
+  resize: vertical;
+  background: #0f172a;
+  color: #e5e7eb; 
 }
 
-.estrellas {
+.form-resena input::placeholder,
+.form-resena textarea::placeholder {
+  color: #94a3b8; 
+}
+
+.form-resena .error {
+  color: #f87171; 
+  font-size: 12px;
+  text-align: left;
+  margin-top: 4px;
+}
+
+.form-resena .actions {
   display: flex;
+  gap: 10px;
   justify-content: center;
-  margin-bottom: 10px;
-  gap: 5px;
+  margin-top: 12px;
 }
 
-.estrella {
-  font-size: 40px;
-  color: #444;
-  cursor: pointer;
-  transition: color 0.2s ease, transform 0.1s ease;
-}
-
-.estrella:hover {
-  transform: scale(1.2);
-}
-
-.estrella.activa {
-  color: gold;
-}
-
-textarea {
-  width: 90%;
-  height: 70px;
-  border-radius: 8px;
-  border: none;
-  padding: 10px;
-  resize: none;
-  background: #222;
-  color: white;
-}
-
-button {
-  background: #ffcc00;
-  color: #000;
-  border: none;
-  border-radius: 8px;
+.form-resena .btn {
+  border: 1px solid #334155;
+  border-radius: 10px;
   padding: 8px 14px;
+  background: #1f2937; 
+  color: #e5e7eb;
   cursor: pointer;
-  font-weight: bold;
-  margin-top: 10px;
+}
+
+.form-resena .btn:hover {
+  background: #111827; 
+}
+
+.form-resena .btn-primary {
+  background: #2563eb; 
+  border-color: #1d4ed8;
+  color: #fff;
+}
+
+.form-resena .btn-primary:hover {
+  background: #1d4ed8; 
 }
 

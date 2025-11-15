@@ -1,19 +1,27 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./TarjetaJuego.css";
+import ListaResenas from "./ListaResenas";
 
-function TarjetaJuego({ juego, actualizarJuego }) {
+function TarjetaJuego({ juego, actualizarJuego, recargar }) {
   const [comentario, setComentario] = useState("");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+  const [usuario, setUsuario] = useState("");
+  const [editando, setEditando] = useState(false);
+  const [form, setForm] = useState({
+    titulo: juego?.titulo || "",
+    descripcion: juego?.descripcion || "",
+    portada: juego?.portada || "",
+  });
 
-  const promedio =
-    juego.resenas && juego.resenas.length > 0
-      ? (
-          juego.resenas.reduce((acc, r) => acc + (r.estrellas || 0), 0) /
-          juego.resenas.length
-        ).toFixed(1)
-      : (juego.avgRating || 0);
+  const countLocal = Array.isArray(juego.resenas) ? juego.resenas.length : 0;
+  const promedio = countLocal > 0
+    ? (
+        juego.resenas.reduce((acc, r) => acc + (r.estrellas || 0), 0) /
+        countLocal
+      ).toFixed(2)
+    : "0.00";
 
   const enviar = async () => {
     if (!comentario.trim()) return alert("Escribe una reseña");
@@ -23,6 +31,7 @@ function TarjetaJuego({ juego, actualizarJuego }) {
       const nuevaResena = {
         texto: comentario,
         rating: rating,
+        usuario: usuario || undefined,
       };
 
       const res = await axios.post(
@@ -35,6 +44,7 @@ function TarjetaJuego({ juego, actualizarJuego }) {
       setComentario("");
       setRating(0);
       setHover(0);
+      setUsuario("");
 
       alert("Reseña agregada correctamente");
     } catch (error) {
@@ -43,10 +53,35 @@ function TarjetaJuego({ juego, actualizarJuego }) {
     }
   };
 
+  const guardarJuego = async () => {
+    try {
+      const payload = { ...form };
+      await axios.put(`http://localhost:4000/api/juegos/${juego._id}`, payload);
+      alert("Juego actualizado");
+      setEditando(false);
+      if (recargar) recargar();
+    } catch (error) {
+      console.error("Error al actualizar juego:", error);
+      alert("No se pudo actualizar el juego");
+    }
+  };
+
+  const borrarJuego = async () => {
+    if (!window.confirm("¿Seguro que deseas borrar este juego?")) return;
+    try {
+      await axios.delete(`http://localhost:4000/api/juegos/${juego._id}`);
+      alert("Juego borrado");
+      if (recargar) recargar();
+    } catch (error) {
+      console.error("Error al borrar juego:", error);
+      alert("No se pudo borrar el juego");
+    }
+  };
+
 
   
   return (
-    <div className="juego-card"> {/* <==== CAMBIO 1 */}
+    <div className="juego-card"> 
       <img className="juego-portada" src={juego.portada} alt={juego.titulo} />
 
       <h3 className="titulo-juego" style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -93,6 +128,15 @@ function TarjetaJuego({ juego, actualizarJuego }) {
           onChange={(e) => setComentario(e.target.value)}
           className="textarea-resena"
         ></textarea>
+
+        <input
+          type="text"
+          placeholder="Nombre de usuario (opcional)"
+          value={usuario}
+          onChange={(e) => setUsuario(e.target.value)}
+          className="textarea-resena"
+          style={{ height: 36 }}
+        />
 
         <button className="btn-resena" onClick={enviar}> {/* <==== CAMBIO 3 */}
           Enviar reseña

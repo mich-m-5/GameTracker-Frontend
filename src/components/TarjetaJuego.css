@@ -1,10 +1,10 @@
 .biblioteca-container {
   display: grid;
-  grid-template-columns: repeat(3, 320px);
+  grid-template-columns: repeat(2, 360px);
   justify-content: center;
-  gap: 24px;
+  gap: 28px;
   align-items: start;
-  padding: 10px 0;
+  padding: 16px 0;
 }
 
 .juego-card {
@@ -26,10 +26,10 @@
 
 .juego-portada {
   width: 100%;
-  height: 160px;
+  height: 180px;
   object-fit: cover;
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .titulo-juego {
@@ -82,7 +82,7 @@
   font-size: 18px;
   line-height: 1;
   margin: 0 0 4px 0;
-  color: #b8860b; /* dorado suave */
+  color: #b8860b; 
   letter-spacing: 2px;
 }
 .lista-resenas .texto { margin: 0; white-space: pre-wrap; }

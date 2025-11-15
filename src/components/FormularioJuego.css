@@ -1,0 +1,65 @@
+.formulario-juego {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.formulario-juego h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.formulario-juego label {
+  font-weight: 600;
+  color: #f8fafc; 
+}
+
+.formulario-juego input[type="text"],
+.formulario-juego textarea,
+.formulario-juego select {
+  border: 1px solid #334155; 
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  background: #0f172a; 
+  color: #e5e7eb; 
+}
+
+.formulario-juego textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.error {
+  color: #f87171; 
+  font-size: 12px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.btn {
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 8px 12px;
+  background: #1f2937; 
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #111827; 
+}
+
+.btn-primary {
+  background: #2563eb;
+  border-color: #1d4ed8;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}

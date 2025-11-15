@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./components/navbar";
 import BibliotecaJuegos from "./components/BibliotecaJuegos";
 import FormularioJuego from "./components/FormularioJuego";
+import Modal from "./components/Modal";
 import "./App.css";
 
 function App() {
   const [juegos, setJuegos] = useState([]);
   const [mostrarFormularioJuego, setMostrarFormularioJuego] = useState(false);
 
-  // ⭐⭐⭐ AQUI LA FUNCIÓN QUE FALTABA ⭐⭐⭐
   const actualizarJuego = (id, nuevaResena) => {
     setJuegos(prev =>
       prev.map(j =>
@@ -19,11 +19,10 @@ function App() {
     );
   };
 
-  // Cargar juegos del backend
   useEffect(() => {
     fetch("http://localhost:4000/api/juegos")
       .then((res) => res.json())
-      .then((data) => setJuegos(data));
+      .then((data) => setJuegos(data.map(j => ({ ...j, resenas: [] }))));
   }, []);
 
   return (
@@ -31,14 +30,20 @@ function App() {
       <Navbar onAgregarJuego={() => setMostrarFormularioJuego(true)} />
 
       {mostrarFormularioJuego && (
-        <FormularioJuego
-          onClose={() => setMostrarFormularioJuego(false)}
-          recargar={() => window.location.reload()}
-        />
+        <Modal onClose={() => setMostrarFormularioJuego(false)}>
+          <FormularioJuego
+            onAgregar={(nuevo) => setJuegos((prev) => [...prev, { ...nuevo, resenas: [] }])}
+            onClose={() => setMostrarFormularioJuego(false)}
+          />
+        </Modal>
       )}
 
-      {/* ⭐⭐⭐ AQUI ENVÍO LA FUNCIÓN A LOS HIJOS ⭐⭐⭐ */}
-      <BibliotecaJuegos juegos={juegos} actualizarJuego={actualizarJuego} />
+
+      <BibliotecaJuegos
+        juegos={juegos}
+        actualizarJuego={actualizarJuego}
+        recargar={() => window.location.reload()}
+      />
     </div>
   );
 }
