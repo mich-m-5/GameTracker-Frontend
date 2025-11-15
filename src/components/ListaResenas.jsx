@@ -86,26 +86,3 @@ function ListaResenas({ idJuego, nuevaResenaTrigger }) {
 }
 
 export default ListaResenas;
-
-
-
-
-
-
-/* useEffect(() => {
-  const cargar = async () => {
-    try {
-      const resp = await fetch(
-        `http://localhost:4000/api/resenas?juegoId=${idJuego}`
-      );
-      const data = await resp.json();
-
-      console.log("RESEÑAS CARGADAS:", data); // ← AGREGA ESTO
-
-      setResenas(data);
-    } catch (err) {
-      console.error("Error cargando reseñas:", err);
-    }
-  };
-  cargar();
-}, [idJuego, nuevaResenaTrigger]); */
