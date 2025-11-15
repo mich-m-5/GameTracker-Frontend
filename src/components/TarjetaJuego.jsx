@@ -102,6 +102,50 @@ function TarjetaJuego({ juego, actualizarJuego, recargar }) {
 
       <p>{juego.descripcion}</p>
 
+      {/* Controles de edición */}
+      {!editando && (
+        <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+          <button className="btn-resena" onClick={() => setEditando(true)}>Editar juego</button>
+        </div>
+      )}
+
+      {editando && (
+        <div style={{ background: "#111", padding: 10, borderRadius: 8, marginTop: 8 }}>
+          <h4 style={{ marginTop: 0 }}>Editar información</h4>
+          <input
+            type="text"
+            className="textarea-resena"
+            style={{ height: 36 }}
+            placeholder="Título"
+            value={form.titulo}
+            onChange={(e) => setForm({ ...form, titulo: e.target.value })}
+          />
+          <input
+            type="text"
+            className="textarea-resena"
+            style={{ height: 36 }}
+            placeholder="URL de la portada"
+            value={form.portada}
+            onChange={(e) => setForm({ ...form, portada: e.target.value })}
+          />
+          <textarea
+            className="textarea-resena"
+            placeholder="Descripción"
+            value={form.descripcion}
+            onChange={(e) => setForm({ ...form, descripcion: e.target.value })}
+          />
+
+          <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+            <button className="btn-resena" onClick={guardarJuego}>Guardar</button>
+            <button className="btn-resena" onClick={() => setEditando(false)}>Cancelar</button>
+            {/* Al entrar en edición, también aparece la opción de eliminar */}
+            <button className="btn-resena" style={{ background: "#7f1d1d" }} onClick={borrarJuego}>
+              Eliminar juego
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="resena-box">
         <h4>⭐ Agregar reseña</h4>
 

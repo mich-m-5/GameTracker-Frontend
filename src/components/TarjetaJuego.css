@@ -2,9 +2,9 @@
   display: grid;
   grid-template-columns: repeat(2, 360px);
   justify-content: center;
-  gap: 28px;
+  gap: 100px; /* mayor separación entre tarjetas */
   align-items: start;
-  padding: 16px 0;
+  padding: 16px 24px; /* añade espacio lateral */
 }
 
 .juego-card {
