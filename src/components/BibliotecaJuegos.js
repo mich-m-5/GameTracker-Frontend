@@ -1,18 +1,16 @@
 import React from "react";
 import TarjetaJuego from "./TarjetaJuego";
-import "./BibliotecaJuegos.css";
+import "./TarjetaJuego.css";
 
-function BibliotecaJuegos({ juegos }) {
+function BibliotecaJuegos({ juegos, actualizarJuego }) {
   return (
-    <div className="biblioteca">
-      {juegos.length === 0 && (
-        <p style={{ color: "#ccc", textAlign: "center" }}>
-          No hay juegos todavía. Agrega uno.
-        </p>
-      )}
-
+    <div className="biblioteca-container">
       {juegos.map((juego) => (
-        <TarjetaJuego key={juego._id} juego={juego} />
+        <TarjetaJuego
+          key={juego._id}
+          juego={juego}
+          actualizarJuego={actualizarJuego}
+        />
       ))}
     </div>
   );

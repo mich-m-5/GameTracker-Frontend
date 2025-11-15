@@ -8,7 +8,18 @@ function App() {
   const [juegos, setJuegos] = useState([]);
   const [mostrarFormularioJuego, setMostrarFormularioJuego] = useState(false);
 
-  // Cargar juegos
+  // ⭐⭐⭐ AQUI LA FUNCIÓN QUE FALTABA ⭐⭐⭐
+  const actualizarJuego = (id, nuevaResena) => {
+    setJuegos(prev =>
+      prev.map(j =>
+        j._id === id
+          ? { ...j, resenas: [...(j.resenas || []), nuevaResena] }
+          : j
+      )
+    );
+  };
+
+  // Cargar juegos del backend
   useEffect(() => {
     fetch("http://localhost:4000/api/juegos")
       .then((res) => res.json())
@@ -19,7 +30,6 @@ function App() {
     <div>
       <Navbar onAgregarJuego={() => setMostrarFormularioJuego(true)} />
 
-      {/* Mostrar formulario solo cuando se presiona el botón */}
       {mostrarFormularioJuego && (
         <FormularioJuego
           onClose={() => setMostrarFormularioJuego(false)}
@@ -27,7 +37,8 @@ function App() {
         />
       )}
 
-      <BibliotecaJuegos juegos={juegos} />
+      {/* ⭐⭐⭐ AQUI ENVÍO LA FUNCIÓN A LOS HIJOS ⭐⭐⭐ */}
+      <BibliotecaJuegos juegos={juegos} actualizarJuego={actualizarJuego} />
     </div>
   );
 }

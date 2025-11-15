@@ -1,10 +1,22 @@
+.biblioteca-container {
+  display: grid;
+  grid-template-columns: repeat(3, 320px);
+  justify-content: center;
+  gap: 24px;
+  align-items: start;
+  padding: 10px 0;
+}
+
 .juego-card {
   background: #222;
-  padding: 15px;
+  padding: 12px;
   border-radius: 12px;
-  margin: 15px;
+  margin: 0;
   transition: 0.3s;
   box-shadow: 0 0 10px #000;
+  border: 1px solid #2a2a2a;
+  overflow: hidden;
+  width: 100%;
 }
 
 .juego-card:hover {
@@ -12,11 +24,36 @@
   box-shadow: 0 0 15px yellow;
 }
 
+.juego-portada {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
 .titulo-juego {
   color: yellow;
   text-shadow: 0 0 8px yellow;
   font-size: 20px;
   margin-bottom: 8px;
+}
+
+.resena-box {
+  margin-top: 10px;
+  padding: 10px;
+  background: #111;
+  border-radius: 8px;
+}
+
+.textarea-resena {
+  width: 100%;
+  margin-top: 10px;
+  background: #333;
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 6px;
 }
 
 .btn-resena {
@@ -33,3 +70,20 @@
   background: yellow;
   color: black;
 }
+
+.lista-resenas {
+  margin-top: 10px;
+}
+
+
+
+.lista-resenas .resena-item { margin-bottom: 12px; }
+.lista-resenas .estrellas {
+  font-size: 18px;
+  line-height: 1;
+  margin: 0 0 4px 0;
+  color: #b8860b; /* dorado suave */
+  letter-spacing: 2px;
+}
+.lista-resenas .texto { margin: 0; white-space: pre-wrap; }
+.lista-resenas .error { color: red; }
